@@ -43,12 +43,23 @@
     patient3.delegate = doctor1;
     patient4.delegate = doctor1;
     
-    NSLog(@"%@ are ok? %@", patient1.name, [patient1 howAreU] ? @"YES" : @"NO");
-    NSLog(@"%@ are ok? %@", patient2.name, [patient2 howAreU] ? @"YES" : @"NO");
-    NSLog(@"%@ are ok? %@", patient3.name, [patient3 howAreU] ? @"YES" : @"NO");
-    NSLog(@"%@ are ok? %@", patient4.name, [patient4 howAreU] ? @"YES" : @"NO");
+//    NSLog(@"%@ are ok? %@", patient1.name, [patient1 howAreU] ? @"YES" : @"NO");
+//    NSLog(@"%@ are ok? %@", patient2.name, [patient2 howAreU] ? @"YES" : @"NO");
+//    NSLog(@"%@ are ok? %@", patient3.name, [patient3 howAreU] ? @"YES" : @"NO");
+//    NSLog(@"%@ are ok? %@", patient4.name, [patient4 howAreU] ? @"YES" : @"NO");
     
-
+    NSArray* patients = [NSArray arrayWithObjects:patient1, patient2, patient3, patient4, nil];
+    
+    for (ASPatient* patient in patients) {
+         NSLog(@"%@ are ok? %@", patient.name, [patient howAreU] ? @"YES" : @"NO");
+     }
+     
+     for (id <ASPatientDelegate> patient in patients) {
+         if ([patient isKindOfClass:[ASPatient class]]) { //is из swift
+             ASPatient* object = (ASPatient*)patient; //cast
+             NSLog(@"patient is %@", object.name);
+         }
+     }
 
     
     return YES;
