@@ -24,11 +24,14 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//    [self.drawingView setNeedsDisplay];
+
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         printf("rotation is started\n"); //как только начинается поворот экрана
+        [self.drawingView setNeedsDisplay];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         printf("rotation is done\n"); //как только заканчивается поворот экрана
-        [self.drawingView setNeedsDisplay];
+//        [self.drawingView setNeedsDisplay];
     }];
 }
 
