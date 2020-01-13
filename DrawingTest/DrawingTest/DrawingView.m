@@ -162,7 +162,7 @@
         CGSize textSize = [text sizeWithAttributes:attiributes];
 //        NSLog(@"%@", NSStringFromCGRect(boardRect));
 
-        CGRect textRect = CGRectMake(CGRectGetMinX(boardRect) + i * cellSize + (cellSize / 2) - textSize.width / 2, CGRectGetMaxY(boardRect) + 10, textSize.width, textSize.height);
+        CGRect textRect = CGRectMake(CGRectGetMinX(boardRect) + i * cellSize + (cellSize / 2) - textSize.width / 2, CGRectGetMaxY(boardRect) + 10, MAX(textSize.width, textSize.height), MAX(textSize.width, textSize.height));
         textRect = CGRectIntegral(textRect);
         
         [text drawInRect:textRect withAttributes:attiributes];
@@ -175,7 +175,7 @@
         NSString *text = [numbers objectAtIndex:i];
         
         CGSize textSize = [text sizeWithAttributes:attiributes];
-        CGRect textRect = CGRectMake(CGRectGetMinX(boardRect) - 25, CGRectGetMaxY(boardRect) - i * cellSize - (cellSize / 2) - textSize.width, textSize.width, textSize.height);
+        CGRect textRect = CGRectMake(CGRectGetMinX(boardRect) - 20, CGRectGetMaxY(boardRect) - i * cellSize - (cellSize / 2) - textSize.width, MAX(textSize.width, textSize.height), MAX(textSize.width, textSize.height));
         textRect = CGRectIntegral(textRect);
         
         [text drawInRect:textRect withAttributes:attiributes];
