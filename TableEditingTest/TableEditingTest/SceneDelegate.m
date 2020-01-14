@@ -13,12 +13,13 @@
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     ViewController *vc = [[ViewController alloc]init];
+    UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:vc];
 //    self.window = [[UIWindow alloc]initWithFrame:UIScreen.mainScreen.bounds];
 //    self.window.rootViewController = vc;
 //    [self.window makeKeyAndVisible];
 //    self.window.windowScene = (UIWindowScene *)(scene);
     self.window = [[UIWindow alloc]initWithWindowScene:(UIWindowScene *)scene];
-    self.window.rootViewController = vc;
+    self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
 }
 
