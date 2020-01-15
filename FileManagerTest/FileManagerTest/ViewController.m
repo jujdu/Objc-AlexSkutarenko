@@ -84,7 +84,6 @@
     
     if (cell) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        UIAlertView
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wow"
                                                                        message:[NSString stringWithFormat:@"Button's pressed at %d %d", indexPath.section, indexPath.row]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
