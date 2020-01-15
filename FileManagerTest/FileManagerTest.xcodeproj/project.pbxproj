@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F07658E23CF308F00BCDAD7 /* UIView+UITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F07658D23CF308F00BCDAD7 /* UIView+UITableViewCell.m */; };
+		6F4EF57A23CF152A003E3712 /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4EF57923CF152A003E3712 /* FileCell.m */; };
 		6F77337C23CE46270046D86B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F77337B23CE46270046D86B /* AppDelegate.m */; };
 		6F77337F23CE46270046D86B /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F77337E23CE46270046D86B /* SceneDelegate.m */; };
 		6F77338223CE46270046D86B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F77338123CE46270046D86B /* ViewController.m */; };
@@ -14,9 +16,16 @@
 		6F77338723CE462D0046D86B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F77338623CE462D0046D86B /* Assets.xcassets */; };
 		6F77338A23CE462D0046D86B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F77338823CE462D0046D86B /* LaunchScreen.storyboard */; };
 		6F77338D23CE462D0046D86B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F77338C23CE462D0046D86B /* main.m */; };
+		6FC3790823CEFF5500681A44 /* DummyViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790723CEFF5500681A44 /* DummyViewControllerTableViewController.m */; };
+		6FC3790C23CF01B700681A44 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790A23CF01B700681A44 /* CustomCell.m */; };
+		6FC3790D23CF01B700681A44 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3790B23CF01B700681A44 /* CustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F07658C23CF308F00BCDAD7 /* UIView+UITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+UITableViewCell.h"; sourceTree = "<group>"; };
+		6F07658D23CF308F00BCDAD7 /* UIView+UITableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+UITableViewCell.m"; sourceTree = "<group>"; };
+		6F4EF57823CF152A003E3712 /* FileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
+		6F4EF57923CF152A003E3712 /* FileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
 		6F77337723CE46270046D86B /* FileManagerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileManagerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F77337A23CE46270046D86B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6F77337B23CE46270046D86B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +38,11 @@
 		6F77338923CE462D0046D86B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F77338B23CE462D0046D86B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F77338C23CE462D0046D86B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6FC3790623CEFF5500681A44 /* DummyViewControllerTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DummyViewControllerTableViewController.h; sourceTree = "<group>"; };
+		6FC3790723CEFF5500681A44 /* DummyViewControllerTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DummyViewControllerTableViewController.m; sourceTree = "<group>"; };
+		6FC3790923CF01B700681A44 /* CustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		6FC3790A23CF01B700681A44 /* CustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		6FC3790B23CF01B700681A44 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F4EF57B23CF152E003E3712 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6F4EF57823CF152A003E3712 /* FileCell.h */,
+				6F4EF57923CF152A003E3712 /* FileCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		6F77336E23CE46270046D86B = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +90,14 @@
 				6F77337E23CE46270046D86B /* SceneDelegate.m */,
 				6F77338023CE46270046D86B /* ViewController.h */,
 				6F77338123CE46270046D86B /* ViewController.m */,
+				6FC3790623CEFF5500681A44 /* DummyViewControllerTableViewController.h */,
+				6FC3790723CEFF5500681A44 /* DummyViewControllerTableViewController.m */,
+				6FC3790923CF01B700681A44 /* CustomCell.h */,
+				6FC3790A23CF01B700681A44 /* CustomCell.m */,
+				6FC3790B23CF01B700681A44 /* CustomCell.xib */,
+				6F4EF57B23CF152E003E3712 /* Cells */,
+				6F07658C23CF308F00BCDAD7 /* UIView+UITableViewCell.h */,
+				6F07658D23CF308F00BCDAD7 /* UIView+UITableViewCell.m */,
 				6F77338323CE46270046D86B /* Main.storyboard */,
 				6F77338623CE462D0046D86B /* Assets.xcassets */,
 				6F77338823CE462D0046D86B /* LaunchScreen.storyboard */,
@@ -135,6 +166,7 @@
 			files = (
 				6F77338A23CE462D0046D86B /* LaunchScreen.storyboard in Resources */,
 				6F77338723CE462D0046D86B /* Assets.xcassets in Resources */,
+				6FC3790D23CF01B700681A44 /* CustomCell.xib in Resources */,
 				6F77338523CE46270046D86B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F07658E23CF308F00BCDAD7 /* UIView+UITableViewCell.m in Sources */,
 				6F77338223CE46270046D86B /* ViewController.m in Sources */,
+				6F4EF57A23CF152A003E3712 /* FileCell.m in Sources */,
+				6FC3790823CEFF5500681A44 /* DummyViewControllerTableViewController.m in Sources */,
+				6FC3790C23CF01B700681A44 /* CustomCell.m in Sources */,
 				6F77337C23CE46270046D86B /* AppDelegate.m in Sources */,
 				6F77338D23CE462D0046D86B /* main.m in Sources */,
 				6F77337F23CE46270046D86B /* SceneDelegate.m in Sources */,

@@ -10,7 +10,11 @@
 
 @interface ViewController : UITableViewController
 
+@property (strong, nonatomic) NSString *path;
+
 - (id) initWithFolderPath:(NSString *)path;
+
+- (IBAction)actionInfoCell:(id)sender;
 
 @end
 
