@@ -9,9 +9,12 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import "MapAnnotation.h"
+#import "UIView+MKAnnotationView.h"
 
 @interface ViewController () <MKMapViewDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLGeocoder *geoCoder;
+@property (strong, nonatomic) MKDirections *directions;
 @end
 
 @implementation ViewController
@@ -32,6 +35,17 @@
     
     UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(actionShowAll:)];
       self.navigationItem.rightBarButtonItems = @[addButton, space, zoomButton];
+    
+    self.geoCoder = [[CLGeocoder alloc]init];
+}
+
+- (void)dealloc {
+    if (self.geoCoder.isGeocoding) {
+        [self.geoCoder cancelGeocode];
+    }
+    if (self.directions.calculating) {
+        [self.directions cancel];
+    }
 }
 
 #pragma mark - Actions
@@ -96,6 +110,15 @@
         pin.animatesDrop = YES;
         pin.canShowCallout = YES;
         pin.draggable = YES;
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [button addTarget:self action:@selector(actionDescription:) forControlEvents:UIControlEventTouchUpInside];
+        pin.rightCalloutAccessoryView = button;
+        
+        UIButton *directionButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [directionButton addTarget:self action:@selector(actionDirection:) forControlEvents:UIControlEventTouchUpInside];
+        pin.leftCalloutAccessoryView = directionButton;
+        
     } else {
         pin.annotation = annotation;
     }
@@ -121,6 +144,103 @@
         NSLog(@"location = [%f, %f] \npoint = %@", location.latitude, location.longitude, MKStringFromMapPoint(point));
     }
 }
+
+#pragma mark - Actions
+
+- (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)actionDescription:(UIButton *)sender {
+    MKAnnotationView *annotationView = [sender superAnnotationView];
+    
+    if (!annotationView) {
+        return;
+    }
+    
+    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+    
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    
+    if (self.geoCoder.isGeocoding) {
+        [self.geoCoder cancelGeocode];
+    }
+    
+    [self.geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        NSString *message = nil;
+        if (error) {
+            message = error.localizedDescription;
+        } else {
+            if ([placemarks count] > 0) {
+                CLPlacemark *placeMark = [placemarks firstObject];
+                message = [NSString stringWithFormat:@"%@, %@, %@, %@",placeMark.country, placeMark.name, placeMark.thoroughfare, placeMark.subThoroughfare];
+            } else {
+                message = @"No placemarks Found";
+            }
+        }
+        
+        [self showAlertWithTitle:@"Location" andMessage:message];
+    }];
+}
+
+- (void)actionDirection:(UIButton *)sender {
+    MKAnnotationView *annotationView = [sender superAnnotationView];
+    
+    if (!annotationView) {
+        return;
+    }
+    
+    if (self.directions.calculating) {
+        [self.directions cancel];
+    }
+    
+    CLLocationCoordinate2D coordinate = annotationView.annotation.coordinate;
+        
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc]init];
+    request.source = [MKMapItem mapItemForCurrentLocation];
+    
+    MKPlacemark *placeMark = [[MKPlacemark alloc]initWithCoordinate:coordinate];
+    MKMapItem *destination = [[MKMapItem alloc]initWithPlacemark:placeMark];
+    request.destination = destination;
+    
+    request.requestsAlternateRoutes = YES;
+    request.transportType = MKDirectionsTransportTypeAutomobile;
+    
+    self.directions = [[MKDirections alloc]initWithRequest:request];
+    
+    [self.directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            [self showAlertWithTitle:@"Location" andMessage:error.localizedDescription];
+        } else if ([response.routes count] == 0) {
+            [self showAlertWithTitle:@"Location" andMessage:@"No routes found"];
+        } else {
+            [self.mapView removeOverlays:self.mapView.overlays];
+            
+            NSMutableArray *array = [NSMutableArray array];
+            
+            for (MKRoute *route in response.routes) {
+                [array addObject:route.polyline];
+            }
+            
+            [self.mapView addOverlays:array level:MKOverlayLevelAboveRoads];
+            
+        }
+    }];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolylineRenderer *render = [[MKPolylineRenderer alloc]initWithOverlay:overlay];
+        
+        render.lineWidth = 5;
+        render.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        return render;
+    }
+    return nil;
+}
+
 
 //
 //- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {

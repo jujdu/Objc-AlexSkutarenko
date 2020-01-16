@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F796F3C23D0D1FD00650480 /* UIView+MKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F796F3B23D0D1FD00650480 /* UIView+MKAnnotationView.m */; };
 		6FA552BA23D0393E0064699E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA552B923D0393E0064699E /* AppDelegate.m */; };
 		6FA552BD23D0393E0064699E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA552BC23D0393E0064699E /* SceneDelegate.m */; };
 		6FA552C023D0393E0064699E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA552BF23D0393E0064699E /* ViewController.m */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F796F3A23D0D1FD00650480 /* UIView+MKAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+MKAnnotationView.h"; sourceTree = "<group>"; };
+		6F796F3B23D0D1FD00650480 /* UIView+MKAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+MKAnnotationView.m"; sourceTree = "<group>"; };
 		6FA552B523D0393E0064699E /* MapTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA552B823D0393E0064699E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6FA552B923D0393E0064699E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 				6FA552B823D0393E0064699E /* AppDelegate.h */,
 				6FA552B923D0393E0064699E /* AppDelegate.m */,
 				6FA552BB23D0393E0064699E /* SceneDelegate.h */,
+				6F796F3A23D0D1FD00650480 /* UIView+MKAnnotationView.h */,
+				6F796F3B23D0D1FD00650480 /* UIView+MKAnnotationView.m */,
 				6FA552BC23D0393E0064699E /* SceneDelegate.m */,
 				6FA552BE23D0393E0064699E /* ViewController.h */,
 				6FA552BF23D0393E0064699E /* ViewController.m */,
@@ -165,6 +170,7 @@
 			files = (
 				6FA552C023D0393E0064699E /* ViewController.m in Sources */,
 				6FA552BA23D0393E0064699E /* AppDelegate.m in Sources */,
+				6F796F3C23D0D1FD00650480 /* UIView+MKAnnotationView.m in Sources */,
 				6FA552CB23D039400064699E /* main.m in Sources */,
 				6FA552BD23D0393E0064699E /* SceneDelegate.m in Sources */,
 				6FA552D623D056D30064699E /* MapAnnotation.m in Sources */,
