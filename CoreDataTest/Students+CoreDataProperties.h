@@ -20,6 +20,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *firstName;
 @property (nullable, nonatomic, copy) NSString *lastName;
 @property (nullable, nonatomic, copy) NSNumber *score;
+@property (nullable, nonatomic, retain) Car *car;
+@property (nullable, nonatomic, retain) University *university;
+@property (nullable, nonatomic, retain) NSSet<Course *> *courses;
+
+@end
+
+@interface Students (CoreDataGeneratedAccessors)
+
+- (void)addCoursesObject:(Course *)value;
+- (void)removeCoursesObject:(Course *)value;
+- (void)addCourses:(NSSet<Course *> *)values;
+- (void)removeCourses:(NSSet<Course *> *)values;
 
 @end
 

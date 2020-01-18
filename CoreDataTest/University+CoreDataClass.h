@@ -1,5 +1,5 @@
 //
-//  Students+CoreDataClass.h
+//  University+CoreDataClass.h
 //  CoreDataTest
 //
 //  Created by Michael Sidoruk on 18.01.2020.
@@ -10,14 +10,14 @@
 #import <Foundation/Foundation.h>
 #import "MyObject+CoreDataClass.h"
 
-@class Car, Course, University;
+@class Course, Students;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Students : MyObject
+@interface University : MyObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "Students+CoreDataProperties.h"
+#import "University+CoreDataProperties.h"

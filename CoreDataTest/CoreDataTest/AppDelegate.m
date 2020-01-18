@@ -8,79 +8,129 @@
 
 #import "AppDelegate.h"
 #import "Students+CoreDataClass.h"
+#import "Car+CoreDataClass.h"
+#import "University+CoreDataClass.h"
+#import "Course+CoreDataClass.h"
 
 @interface AppDelegate ()
 
 @end
 
-@implementation AppDelegate
-
 static NSString* firstNames[] =  { @"Adam", @"Alex", @"Aaron", @"Ben", @"Carl", @"Dan", @"David", @"Edward", @"Fred", @"Frank", @"George", @"Hal", @"Hank", @"Ike", @"John", @"Jack", @"Joe", @"Larry", @"Monte", @"Matthew", @"Mark", @"Nathan", @"Otto", @"Paul", @"Peter", @"Roger", @"Roger", @"Steve", @"Thomas", @"Tim"};
 static NSString* lastNames[] =  { @"Anderson", @"Ashwoon", @"Aikin", @"Bateman", @"Bongard", @"Bowers", @"Boyd", @"Cannon", @"Cast", @"Deitz", @"Dewalt", @"Ebner", @"Frick", @"Hancock", @"Haworth", @"Hesch", @"Hoffman", @"Kassing", @"Knutson", @"Lawless", @"Lawicki", @"Mccord", @"McCormack", @"Miller", @"Myers", @"Nugent", @"Ortiz", @"Orwig", @"Ory", @"Holms"};
+static NSString* carModelNames[] =  { @"Honda", @"Dogde", @"Audi", @"Wolswagen", @"Tesla", @"Ford", @"Lamborgini", @"Lada", @"Mersedes", @"BMW", @"Reno", @"Toyota", @"Hynday", @"Chevrolet"};
+
+@implementation AppDelegate
 
 - (Students *)addRandomStudent {
     Students *student = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:self.persistentContainer.viewContext];
     student.score = @((float)arc4random_uniform(201) / 200 + 2);
     student.dateBirth = [NSDate dateWithTimeIntervalSince1970:60*60*24*365*arc4random_uniform(31)];
-    student.firstName = firstNames[arc4random_uniform(50)];
-    student.lastName = lastNames[arc4random_uniform(50)];
+    student.firstName = firstNames[arc4random_uniform(20)];
+    student.lastName = lastNames[arc4random_uniform(20)];
     return student;
+}
+
+- (Car *)addRandomCar {
+    Car *car = [NSEntityDescription insertNewObjectForEntityForName:@"Car" inManagedObjectContext:self.persistentContainer.viewContext];
+    car.model = carModelNames[arc4random_uniform(13)];
+    return car;
+}
+
+- (University *)addUniversity {
+    University *university = [NSEntityDescription insertNewObjectForEntityForName:@"University" inManagedObjectContext:self.persistentContainer.viewContext];
+    university.name = @"ONPI";
+    return university;
+}
+
+- (NSArray *)allObjects {
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"MyObject" inManagedObjectContext:self.persistentContainer.viewContext];
+    [request setEntity:description];
+    
+    NSError *errorRequest = nil;
+    NSArray *result = [self.persistentContainer.viewContext executeFetchRequest:request error:&errorRequest];
+    
+    if (errorRequest) {
+        NSLog(@"%@", [errorRequest localizedDescription]);
+    }
+    return result;
+}
+
+- (void) printAllObjects {
+    NSArray *result = [self allObjects];
+    
+    for (id object in result) {
+        if ([object isKindOfClass:[Car class]]) {
+            Car *car = (Car *)object;
+            NSLog(@"CAR: %@, OWNER: %@ %@", car.model, car.owner.firstName, car.owner.lastName);
+        } else if ([object isKindOfClass:[University class]]) {
+            University *university = (University *)object;
+            NSLog(@"UNIVERSITY: %@, STUDENT COUNT: %lu", university.name, (unsigned long)university.students.count);
+        } else {
+            Students *student = (Students *)object;
+            NSLog(@"STUDENT: %@ %@, CAR: %@, UNIVERSITY: %@", student.firstName, student.lastName, student.car.model, student.university.name);
+        }
+    }
+}
+
+
+- (void)deleteAllObjects {
+    NSArray *result = [self allObjects];
+    
+    for (id object in result) {
+        [self.persistentContainer.viewContext deleteObject:object];
+    }
+    [self saveContext];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-
-//    NSLog(@"%@",[self.persistentContainer.managedObjectModel entitiesByName]);
 //
-//    NSManagedObject *student = [NSEntityDescription insertNewObjectForEntityForName:@"Students" inManagedObjectContext:self.persistentContainer.viewContext];
+//    University *university = [self addUniversity];
 //
-//    [student setValue:@"Misha" forKey:@"firstName"];
-//    [student setValue:@"Sidoruk" forKey:@"lastName"];
-//    [student setValue:[NSDate dateWithTimeIntervalSinceReferenceDate:0] forKey:@"dateBirth"];
-//    [student setValue:@4 forKey:@"score"];
+//    for (int i = 0; i < 30; i++) {
+//        Students *student = [self addRandomStudent];
+//
+//        if (arc4random_uniform(1000) / 500) {
+//            Car *car = [self addRandomCar];
+//            student.car = car;
+//        }
+//
+//        student.university = university;
+//    }
 //
 //    NSError *error = nil;
 //
 //    if (![self.persistentContainer.viewContext save:&error]) {
 //        NSLog(@"%@", [error localizedDescription]);
 //    }
-    
-    [self addRandomStudent];
-//    [student.managedObjectContext save:nil];
-    
-     NSError *error = nil;
-    
-    if (![self.persistentContainer.viewContext save:&error]) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
+////
     
     
+    
+//    [self deleteAllObjects];
+    [self printAllObjects];
     
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Students" inManagedObjectContext:self.persistentContainer.viewContext];
-    [request setEntity:description];
-//    [request setResultType:NSDictionaryResultType];
-    NSError *errorRequest = nil;
-    NSArray *result = [self.persistentContainer.viewContext executeFetchRequest:request error:&errorRequest];
-    if (errorRequest) {
-        NSLog(@"%@", [errorRequest localizedDescription]);
-    }
-    
-//    NSLog(@"%@", result);
-//
-//    for (NSManagedObject *object in result) {
-//        NSLog(@"%@ %@ - %@", [object valueForKey:@"firstName"], [object valueForKey:@"lastName"], [object valueForKey:@"score"]);
-//    }
-    
-        NSLog(@"%@", result);
-    
-        for (Students *object in result) {
-            NSLog(@"%@ %@ - %@", object.firstName, object.lastName, object.score);
-//            NSLog(@"%@", object);
-        }
+       NSEntityDescription *description = [NSEntityDescription entityForName:@"University" inManagedObjectContext:self.persistentContainer.viewContext];
+       [request setEntity:description];
+       
+       NSError *errorRequest = nil;
+       NSArray *result = [self.persistentContainer.viewContext executeFetchRequest:request error:&errorRequest];
+       
+       if ([result count] > 0) {
+           University *university = [result firstObject];
+           
+           NSLog(@"University to delete %@", university);
+           
+           [self.persistentContainer.viewContext deleteObject:university];
+           [self saveContext];
+       }
+    [self printAllObjects];
     
     return YES;
+    
 }
 
 
@@ -122,7 +172,7 @@ static NSString* lastNames[] =  { @"Anderson", @"Ashwoon", @"Aikin", @"Bateman",
                      * The device is out of space.
                      * The store could not be migrated to the current model version.
                      Check the error message to determine what the actual problem was.
-                    */
+                     */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                     abort();
                 }
@@ -147,3 +197,4 @@ static NSString* lastNames[] =  { @"Anderson", @"Ashwoon", @"Aikin", @"Bateman",
 }
 
 @end
+

@@ -1,5 +1,5 @@
 //
-//  Students+CoreDataClass.h
+//  MyObject+CoreDataClass.h
 //  CoreDataTest
 //
 //  Created by Michael Sidoruk on 18.01.2020.
@@ -8,16 +8,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MyObject+CoreDataClass.h"
-
-@class Car, Course, University;
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Students : MyObject
+@interface MyObject : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "Students+CoreDataProperties.h"
+#import "MyObject+CoreDataProperties.h"

@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Students" representedClassName="Students" syncable="YES">
+    <entity name="Car" representedClassName="Car" parentEntity="MyObject" syncable="YES">
+        <attribute name="model" optional="YES" attributeType="String"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Students" inverseName="car" inverseEntity="Students"/>
+    </entity>
+    <entity name="Course" representedClassName="Course" parentEntity="MyObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Students" inverseName="courses" inverseEntity="Students"/>
+        <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="University" inverseName="courses" inverseEntity="University"/>
+    </entity>
+    <entity name="MyObject" representedClassName="MyObject" syncable="YES"/>
+    <entity name="Students" representedClassName="Students" parentEntity="MyObject" syncable="YES">
         <attribute name="dateBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="score" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <relationship name="car" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Car" inverseName="owner" inverseEntity="Car"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="students" inverseEntity="Course"/>
+        <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="University" inverseName="students" inverseEntity="University"/>
+    </entity>
+    <entity name="University" representedClassName="University" parentEntity="MyObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Course" inverseName="university" inverseEntity="Course"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Students" inverseName="university" inverseEntity="Students"/>
     </entity>
     <elements>
-        <element name="Students" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Car" positionX="-1362.6796875" positionY="995.8046875" width="128" height="73"/>
+        <element name="MyObject" positionX="-1608.109375" positionY="752.69140625" width="128" height="43"/>
+        <element name="Students" positionX="-1555.3671875" positionY="950.82421875" width="136.25" height="148"/>
+        <element name="University" positionX="-1918.890625" positionY="1010.9140625" width="128" height="88"/>
+        <element name="Course" positionX="-1737.10546875" positionY="955.88671875" width="128" height="88"/>
     </elements>
 </model>
