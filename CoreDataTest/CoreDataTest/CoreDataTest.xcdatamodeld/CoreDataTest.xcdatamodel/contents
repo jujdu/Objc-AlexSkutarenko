@@ -8,6 +8,9 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Students" inverseName="courses" inverseEntity="Students"/>
         <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="University" inverseName="courses" inverseEntity="University"/>
+        <fetchedProperty name="bestStudents" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Students" predicateString="score &gt; 3.75"/>
+        </fetchedProperty>
     </entity>
     <entity name="MyObject" representedClassName="MyObject" syncable="YES"/>
     <entity name="Students" representedClassName="Students" parentEntity="MyObject" syncable="YES">
@@ -24,11 +27,12 @@
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Course" inverseName="university" inverseEntity="Course"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Students" inverseName="university" inverseEntity="Students"/>
     </entity>
+    <fetchRequest name="FetchStudents" entity="Students" predicateString="score &gt; 3 AND score &lt;= 3.5 AND firstName CONTAINS &quot;Be&quot;"/>
     <elements>
         <element name="Car" positionX="-1362.6796875" positionY="995.8046875" width="128" height="73"/>
         <element name="MyObject" positionX="-1608.109375" positionY="752.69140625" width="128" height="43"/>
         <element name="Students" positionX="-1555.3671875" positionY="950.82421875" width="136.25" height="148"/>
         <element name="University" positionX="-1918.890625" positionY="1010.9140625" width="128" height="88"/>
-        <element name="Course" positionX="-1737.10546875" positionY="955.88671875" width="128" height="88"/>
+        <element name="Course" positionX="-1737.10546875" positionY="955.88671875" width="128" height="116"/>
     </elements>
 </model>

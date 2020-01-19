@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, retain) University *university;
 @property (nullable, nonatomic, retain) NSSet<Students *> *students;
+@property (nullable, nonatomic, retain) NSArray *bestStudents;
 
 @end
 
